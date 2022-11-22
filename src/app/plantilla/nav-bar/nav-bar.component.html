@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #aee4a9;" >
+    <div class="container-fluid"  >
+      <a class="navbar-brand" href="/seguridad/login">
+        <img src="../../../assets/parkin.jpg " alt="" width="70" height="30">
+      </a>
+      <a *ngIf="sessionIniciada" class="navbar-brand" href="#">Parqueadero G4</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"                 aria-expanded="false" aria-label="Toggle navigation"> -->
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <!-- <div class="collapse navbar-collapse" id="navbarNav"> -->
+        <ul class="navbar-nav">
+          <li *ngIf="!sessionIniciada" class="nav-item">
+            <a class="nav-link" routerLink="/seguridad/login">Iniciar Sesión</a>
+          </li> 
+          <li *ngIf="sessionIniciada" class="nav-item active">
+            <a class="nav-link" href="administracion/crear-mensualidad">Parqueo</a>
+          </li>
+          <li *ngIf="sessionIniciada" class="nav-item active">
+            <a class="nav-link" href="administracion/crear-persona">Administración - Crear Persona</a>
+          </li>
+          <li *ngIf="sessionIniciada" class="nav-item active">
+            <a class="nav-link" href="seguridad/cerrar-sesion">Cerrar Sesion</a>
+          </li>
+          <li *ngIf="sessionIniciada" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Parqueo List
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="#">Ingreso Vehiculo</a></li>
+              <li><a class="dropdown-item" href="#">Salida Vehiculo</a></li>
+              <li><a class="dropdown-item" href="#">Vehiculos Parqueados</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  

@@ -1,0 +1,139 @@
+<div class="container">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <h4>{{ titulo }}</h4>
+            <form [formGroup]="formulario" >
+                <div class="form-group">
+                    <label for="documento">Documento</label>
+                    <input type="text" formControlName="documento" class="form-control" placeholder="Digite un Documento">
+                    <span *ngIf="this.formulario.get('documento')?.errors?.['required']">
+                        (Debe digitar un documento
+                    </span>
+                    <span *ngIf="this.formulario.get('documento')?.errors?.['minlength']">
+                        (El documento debe tener minimo 10 caracteres)
+                    </span>
+                    <span *ngIf="this.formulario.get('documento')?.errors?.['maxlength']">
+                        (El documento debe tener maximo 50 caracteres)
+                    </span>                   
+                </div>
+                <div class="form-group">
+                    <label for="nombres">Nombre</label>
+                    <input type="text" formControlName="nombres" class="form-control" placeholder="Digite un nombre">
+                    <span *ngIf="this.formulario.get('nombres')?.errors?.['required']">
+                        (Debe digitar un nombre)
+                    </span>
+                    <span *ngIf="this.formulario.get('nombres')?.errors?.['minlength']">
+                        (El nombre debe tener minimo 3 caracteres)
+                    </span>
+                    <span *ngIf="this.formulario.get('nombres')?.errors?.['maxlength']">
+                        (El nombre debe tener maximo 50 caracteres)
+                    </span>                   
+                </div>
+                <div class="form-group">
+                  <label for="apellidos">Apellidos</label>
+                  <input type="text" formControlName="apellidos" class="form-control" placeholder="Digite un apellido">
+                  <span *ngIf="this.formulario.get('apellidos')?.errors?.['required']">
+                      (Debe digitar un apellidos)
+                  </span>
+                  <span *ngIf="this.formulario.get('apellidos')?.errors?.['minlength']">
+                      (El apellidos debe tener minimo 3 caracteres)
+                  </span>
+                  <span *ngIf="this.formulario.get('apellidos')?.errors?.['maxlength']">
+                      (El apellidos debe tener maximo 50 caracteres)
+                  </span>                   
+                </div>
+                <div class="form-group">
+                  <label for="telefono">Teléfono</label>
+                  <input type="number" formControlName="telefono" class="form-control" placeholder="Digite un teléfono">
+                  <span *ngIf="this.formulario.get('telefono')?.errors?.['required']">
+                      (Debe digitar un telefono)
+                  </span>
+                  <span *ngIf="this.formulario.get('telefono')?.errors?.['minlength']">
+                      (El telefono debe tener minimo 7 caracteres)
+                  </span>
+                  <span *ngIf="this.formulario.get('telefono')?.errors?.['maxlength']">
+                      (El telefono debe tener maximo 12 caracteres)
+                  </span>                   
+                </div>
+                <div class="form-group">
+                  <label for="correo">Correo</label>
+                  <input type="text" formControlName="correo" class="form-control" placeholder="Digite un correo">
+                  <span *ngIf="this.formulario.get('correo')?.errors?.['required']">
+                      (Debe digitar un correo)
+                  </span>
+                  <span *ngIf="this.formulario.get('correo')?.errors?.['minlength']">
+                      (El correo debe tener minimo 10 caracteres)
+                  </span>
+                  <span *ngIf="this.formulario.get('correo')?.errors?.['maxlength']">
+                      (El correo debe tener maximo 100 caracteres)
+                  </span>
+                  <span *ngIf="this.formulario.get('correo')?.errors?.['email']">
+                    (debe tener un correo valido)
+                  </span>
+                </div>
+                <div class="form-group">
+                  <label for="perfil">Perfil</label>
+                  <select formControlName="perfil" class="form-control" placeholder="Seleccione un perfil">
+                    <option *ngFor="let perfil of listadoPerfiles" value="{{ perfil.value }}">{{ perfil.text }}</option>                    
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" formControlName="password" class="form-control" placeholder="Digite un correo">
+                  <span *ngIf="this.formulario.get('password')?.errors?.['required']">
+                      (Debe digitar un password)
+                  </span>
+                  <span *ngIf="this.formulario.get('password')?.errors?.['minlength']">
+                      (El password debe tener minimo 8 caracteres)
+                  </span>
+                  <span *ngIf="this.formulario.get('password')?.errors?.['maxlength']">
+                      (El password debe tener maximo 50 caracteres)
+                  </span>
+                </div>
+                <br>
+                <button type="button" class="btn btn-primary" (click)="registrar()" >Registrar</button>
+            </form>
+            <hr>
+
+            <h4>Listado de personas</h4>
+            <div class="table_wrapper">
+              <table class="table table-striped table-inverse table-responsive">
+                <thead class="thead-inverse">
+                  <tr>
+                    <!-- <th>Id</th> -->
+                    <th>Documento</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Teléfono</th>
+                    <th>Correo electrónico</th>
+                    <th>Perfil</th>
+                    <th>Password</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <br><br>
+                  <tr *ngFor="let persona of listadoPersonas" >
+                    <!-- <td scope="row" >{{ persona.id }} ></td> -->
+                    <td scope="row" >{{ persona.documento }}</td>
+                    <td>{{ persona.nombres }}</td>
+                    <td>{{ persona.apellidos }}</td>
+                    <td>{{ persona.telefono }}</td>
+                    <td>{{ persona.correo }}</td>
+                    <td>{{ persona.perfil }}</td>
+                    <td>{{ persona.password }}</td>
+                    <td>
+                      <a class="btn btn-success" routerLink="/administracion/persona-edit/{{ persona.id }}">Editar</a> &nbsp; 
+                      <a class="btn btn-danger" (click)="eliminar(persona.id)" >Eliminar</a>
+                  </td>
+                  </tr>                  
+                </tbody>
+              </table>
+
+            </div>
+            <br><br><br>
+        </div>
+        <div class="col-1"></div>
+
+    </div>
+</div>
